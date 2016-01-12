@@ -1,0 +1,497 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+ <head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+  <!--[if lt IE 9]>
+	<link rel="stylesheet" type="text/css" href="css/ie8.css">          
+  <![endif]-->
+  <title> wp-magazine-template </title>
+  <link href="../wp-magazine-template/main.css" rel="stylesheet">
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script>
+	// 슬라이드
+	$(function(){
+		$("#film").prepend($(".scene:last"));
+		$("#film").css({"marginLeft":"-100%"});
+
+		$(".subnews > li:eq(0) a").addClass("select");
+
+		$(".btnright").click(function(){
+			$("#film:not(:animated)").stop().animate({"marginLeft":"-=100%"},800,"swing",function(){
+				$("#film").append($(".scene:first"));
+				$("#film").css({"marginLeft":"-100%"});
+
+				var SceneNum = $(".scene img").attr("src").substring(8,9);
+				SceneNum = Number(SceneNum);
+				if (SceneNum == 4)
+				{
+					SceneNum = 0;
+				}
+				var newClass = $("#subnews li:eq("+SceneNum+") a");
+				$("#subnews li a").removeClass("select");
+				newClass.addClass("select");
+			});
+		});
+
+		$(".btnleft").click(function(){
+			$("#film:not(:animated)").stop().animate({"marginLeft":"+=100%"},800,"swing",function(){
+				$("#film").prepend($(".scene:last"));
+				$("#film").css({"marginLeft":"-100%"});
+			});
+		});
+
+		////////////////////버튼 영역////////////////////
+		$("#subnews li a").click(function(){
+			// 버튼에 해당하는 이미지로 바뀌게 만들기
+			var btnNum = $(this).attr("href").substring(4);
+			var btnimg = Number(btnNum)+1;
+			$("#film li img").attr("src","img/main"+btnimg+".jpg"); 
+
+			// 클래스속성 이어받기
+			$("#subnews li a").removeClass("select");
+			$("#subnews li:eq("+btnNum+") a").addClass("select"); 
+		});
+
+		var autoClick = setInterval(function(){$(".btnright").click();},3000);
+		// 지우기
+		$("#subnews li a").click(function(){
+            clearInterval(autoClick);
+        });
+	});
+
+  </script>
+ </head>
+ <body>
+  <div id="wrap">
+	<div id="header">
+		<div class="logo">
+			<h1>
+				<a href="../wp-magazine-template/index.html" title="newsreporter" id="logo">
+					<img src="img/logo.png" alt="logo"/>
+				</a>
+			</h1>
+			<div class="topnav">
+				<ul class="toplist">
+					<li><a href="#" title="Home">Home</a></li>
+					<li><a href="#" title="About Us">About Us</a></li>
+					<li><a href="#" title="Contact Us">Contact Us</a></li>
+					<li><a href="#" title="Subsribe">Subsribe</a></li>
+					<li><a href="#" title="Login" class="last">Login</a></li>
+				</ul>
+			</div>
+			<div class="sns-search">
+				<ul class="snslist">
+					<li><a href="#" title="twitter"><img src="img/sns1.png" alt="sns1"/></a></li>
+					<li><a href="#" title="facebook"><img src="img/sns2.png" alt="sns2"/></a></li>
+					<li><a href="#" title="wifi"><img src="img/sns3.png" alt="sns3"/></a></li>
+					<li><a href="#" title="like"><img src="img/sns4.png" alt="sns3"/></a></li>
+					<li class="snslast"><a href="#" title="google"><img src="img/sns5.png" alt="sns3"/></a></li>
+				</ul>
+				<div class="search">
+					<input type="text" class="searchin" title="search"/><button type="button" class="searchbtn"></button>
+				</div>
+			</div>
+		</div>
+		<div class="gnb">
+			<ul>
+				<li><a href="#">WORLD NEWS</a></li>
+				<li><a href="#">SPORTS</a></li>
+				<li><a href="#">TECH</a></li>
+				<li><a href="#">BUSINESS</a></li>
+				<li><a href="#">MOVIES</a></li>
+				<li><a href="#">ENTERTAINMENT</a></li>
+				<li><a href="#">CULTURE</a></li>
+				<li><a href="#">BOOKS</a></li>
+				<li><a href="#">CLASSIFIEDS</a></li>
+				<li><a href="#">BLOGS</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="contents">
+		<div class="left">
+			<div class="visual">
+				<div id="mainnews">
+					<ul id="film">
+						<li class="scene">
+							<a href="#" title="headline">
+								<img src="img/main1.jpg" alt="mainimage"/>
+								<span> Lorem ipsum dolor sit amet, consectetur Nulla quis lorem neque, mattis venenatis lectus.</span>
+							</a>
+						</li>
+						<li class="scene">
+							<a href="#" title="headline">
+								<img src="img/main2.jpg" alt="mainimage"/>
+								<span> Lorem ipsum dolor sit amet, consectetur Nulla quis lorem neque, mattis venenatis lectus.</span>
+							</a>
+						</li>
+						<li class="scene">
+							<a href="#" title="headline">
+								<img src="img/main3.jpg" alt="mainimage"/>
+								<span> Lorem ipsum dolor sit amet, consectetur Nulla quis lorem neque, mattis venenatis lectus.</span>
+							</a>
+						</li>
+						<li class="scene">
+							<a href="#" title="headline">
+								<img src="img/main4.jpg" alt="mainimage"/>
+								<span> Lorem ipsum dolor sit amet, consectetur Nulla quis lorem neque, mattis venenatis lectus.</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div id="break"><img src="img/break.jpg" alt="break"/></div>
+				<div id="subnews">
+					<ul>
+						<li>
+							<a class="select" href="#btn0" title="list"><img src="img/list00.jpg" alt="sub"/></a>
+						</li>
+						<li>
+							<a href="#btn1" title="list"><img src="img/list01.jpg" alt="sub"/></a>
+						</li>
+						<li>
+							<a href="#btn2" title="list"><img src="img/list02.jpg" alt="sub"/></a>
+						</li>
+						<li>
+							<a href="#btn3" title="list"><img src="img/list03.jpg" alt="sub"/></a>
+						</li>
+					</ul>
+				</div>
+				<div class="slidbtn">
+					<a href="#" title="이전" class="btnleft"></a>
+					<a href="#" title="다음" class="btnright"></a>
+				</div>
+			</div>
+			<div class="module">
+				<div class="mod-left">
+					<div class="world">
+						<div class="title">
+							<h2>FROM AROUND THE WORLD</h2>
+							<a href="#" title="more"><img src="img/btn-more.jpg" alt="morebtn"/></a>
+						</div>
+						<ul>
+							<li>
+								<a href="#" title="read">
+									<p class="img"><img src="img/list11.jpg" alt="listimg"/></p>
+									<p class="text">
+										<strong>Lorem ipsum dolor sit amet, consectetur </strong><br/>
+										Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor eu mattis.<br/><br/>
+										<span>READ MORE</span>
+									</p>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="read">
+									<p class="img"><img src="img/list12.jpg" alt="listimg"/></p>
+									<p class="text">
+										<strong>Lorem ipsum dolor sit amet, consectetur </strong><br/>
+										Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor eu mattis.<br/><br/>
+										<span>READ MORE</span>
+									</p>
+								</a>
+							</li>
+							<li class="lastli">
+								<a href="#" title="read">
+									<p class="img"><img src="img/list13.jpg" alt="listimg"/></p>
+									<p class="text">
+										<strong>Lorem ipsum dolor sit amet, consectetur </strong><br/>
+										Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor eu mattis.<br/><br/>
+										<span>READ MORE</span>
+									</p>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="article">
+						<div class="title">
+							<h2>LATEST ARTICLES</h2>
+							<a href="#" title="more"><img src="img/btn-more.jpg" alt="morebtn"/></a>
+						</div>
+						<ul>
+							<li>
+								<a href="#" title="read">
+									<p class="img"><img src="img/list14.jpg" alt="listimg"/></p>
+									<p class="text">
+										<strong>Lorem ipsum dolor sit amet, consectetur </strong><br/>
+										Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor eu mattis.<br/><br/>
+										<span>READ MORE</span>
+									</p>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="read">
+									<p class="img"><img src="img/list15.jpg" alt="listimg"/></p>
+									<p class="text">
+										<strong>Lorem ipsum dolor sit amet, consectetur </strong><br/>
+										Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor eu mattis.<br/><br/>
+										<span>READ MORE</span>
+									</p>
+								</a>
+							</li>
+							<li class="lastli">
+								<a href="#" title="read">
+									<p class="img"><img src="img/list16.jpg" alt="listimg"/></p>
+									<p class="text">
+										<strong>Lorem ipsum dolor sit amet, consectetur </strong><br/>
+										Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor eu mattis.<br/><br/>
+										<span>READ MORE</span>
+									</p>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="gallery">
+						<div class="title">
+							<h2>GALLERY</h2>
+							<a href="#" title="more"><img src="img/btn-more.jpg" alt="morebtn"/></a>
+						</div>
+						<ul>
+							<li>
+								<a href="#" title="read">
+									<p class="img"><img src="img/list20.jpg" alt="listimg"/></p>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="read">
+									<p class="img"><img src="img/list21.jpg" alt="listimg"/></p>
+								</a>
+							</li>
+							<li class="lastli">
+								<a href="#" title="read">
+									<p class="img"><img src="img/list22.jpg" alt="listimg"/></p>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="read">
+									<p class="img"><img src="img/list23.jpg" alt="listimg"/></p>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="read">
+									<p class="img"><img src="img/list24.jpg" alt="listimg"/></p>
+								</a>
+							</li>
+							<li class="lastli">
+								<a href="#" title="read">
+									<p class="img"><img src="img/list25.jpg" alt="listimg"/></p>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="news">
+						<div class="title">
+							<h2>TECH NEWS</h2>
+							<a href="#" title="more"><img src="img/btn-more.jpg" alt="morebtn"/></a>
+						</div>
+						<ul class="newsdetail">
+							<li class="dotline">
+								<a href="#" title="read">
+									<p>
+										<strong>Lorem ipsum dolor sit amet conse ctetur adipiscing elit</strong><br/>Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor ...<br/>
+										<span class="fs11">by<span class="colorred"> John Doe   </span>|  29 comments</span>
+									</p>
+								</a>
+							</li>
+							<li class="dotline newsright">
+								<a href="#" title="read">
+									<p>
+										<strong>Lorem ipsum dolor sit amet conse ctetur adipiscing elit</strong><br/>Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor ...<br/>
+										<span class="fs11">by<span class="colorred"> John Doe   </span>|  29 comments</span>
+									</p>
+								</a>
+							</li>
+							<li class="newstop">
+								<a href="#" title="read">
+									<p>
+										<strong>Lorem ipsum dolor sit amet conse ctetur adipiscing elit</strong><br/>Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor ...<br/>
+										<span class="fs11">by<span class="colorred"> John Doe   </span>|  29 comments</span>
+									</p>
+								</a>
+							</li>
+							<li class="newsright newstop ">
+								<a href="#" title="read">
+									<p>
+										<strong>Lorem ipsum dolor sit amet conse ctetur adipiscing elit</strong><br/>Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor ...<br/>
+										<span class="fs11">by<span class="colorred"> John Doe   </span>|  29 comments</span>
+									</p>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="mod-right">
+					<div class="desk">
+						<div class="title"><h2>FROM THE DESK</h2></div>
+						<ul>
+							<li class="dotline">
+								<a href="#" title="read">
+									<p>
+										<strong>Lorem ipsum dolor sit amet, consectetur </strong><br/>
+										Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor eu mattis.<br/><br/>
+										<span class="fs11"><span class="colorred"> READ MORE   </span>  3 hours ago</span>
+									</p>
+								</a>
+							</li>
+							<li class="desktop dotline">
+								<a href="#" title="read">
+									<p>
+										<strong>Lorem ipsum dolor sit amet, consectetur </strong><br/>
+										Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor eu mattis.<br/><br/>
+										<span class="fs11"><span class="colorred"> READ MORE   </span>  3 hours ago</span>
+									</p>
+								</a>
+							</li>
+							<li class="desktop">
+								<a href="#" title="read">
+									<p>
+										<strong>Lorem ipsum dolor sit amet, consectetur </strong><br/>
+										Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor eu mattis.<br/><br/>
+										<span class="fs11"><span class="colorred"> READ MORE   </span>  3 hours ago</span>
+									</p>
+								</a>
+							</li>
+						</ul>
+						<div class="desk-morebtn">
+							<a href="#" title="more"><img src="img/btn-more.jpg" alt="morebtn"/></a>
+						</div>
+					</div>
+					<div class="editorial">
+						<div class="title"><h2>EDITORIAL</h2></div>
+						<ul>
+							<li>
+								<a href="#" title="read">
+									<p class="img"><img src="img/list30.jpg" alt="listimg"/></p>
+									<p class="text2">Lorem ipsum dolor sit amet consectetur adipiscing elit</p>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="read">
+									<p class="img"><img src="img/list31.jpg" alt="listimg"/></p>
+									<p class="text2">Lorem ipsum dolor sit amet consectetur adipiscing elit</p>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="read">
+									<p class="img"><img src="img/list30.jpg" alt="listimg"/></p>
+									<p class="text2">Lorem ipsum dolor sit amet consectetur adipiscing elit</p>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="read">
+									<p class="img"><img src="img/list31.jpg" alt="listimg"/></p>
+									<p class="text2">Lorem ipsum dolor sit amet consectetur adipiscing elit</p>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<div class="video">
+				<ul>
+					<li>
+						<a href="#" title="read">
+							<p class="img3"><img src="img/video.jpg" alt="listimg"/></p>
+							<p class="text3">Lorem ipsum dolor sit amet consectetur adipiscing elit</p>
+						</a>
+					</li>
+					<li>
+						<a href="#" title="read">
+							<p class="img3"><img src="img/video.jpg" alt="listimg"/></p>
+							<p class="text3">Lorem ipsum dolor sit amet consectetur adipiscing elit</p>
+						</a>
+					</li>
+					<li>
+						<a href="#" title="read">
+							<p class="img3"><img src="img/video.jpg" alt="listimg"/></p>
+							<p class="text3">Lorem ipsum dolor sit amet consectetur adipiscing elit</p>
+						</a>
+					</li>
+					<li>
+						<a href="#" title="read">
+							<p class="img3"><img src="img/video.jpg" alt="listimg"/></p>
+							<p class="text3">Lorem ipsum dolor sit amet consectetur adipiscing elit</p>
+						</a>
+					</li>
+				</ul>
+				<div class="video-morebtn">
+					<a href="#" title="more"><img src="img/btn-more.jpg" alt="morebtn"/></a>
+				</div>
+			</div>
+			<div class="banner">
+				<a href="#" title="banner"><img src="img/banner.jpg" alt="banner"/></a>
+			</div>
+			<div class="sign">
+				<h2>Sign Up for Newsletter</h2>
+				<p>Sign up to receive our free newsletters!</p>
+				<input type="text" placeholder="Name" title="name"/>
+				<input type="text" placeholder="Email Address" title="email"/>
+				<input type="submit" class="submitbtn" value="SUBMIT"/>
+				<span>We do not spam. We value your privacy!</span>
+			</div>
+			<div class="popular">
+				<div class="title">
+					<h2>POPULAR MOST READ</h2>
+				</div>
+				<ul>
+					<li>
+						<a href="#" title="popularli">
+							<em>Sept 24th 2011</em><br/> 
+							Lorem ipsum dolor sit amet conse ctetur adipiscing elit <span> Read More</span>
+						</a>
+					</li>
+					<li class="populartop">
+						<a href="#" title="popularli">
+							<em>Sept 24th 2011</em><br/> 
+							Lorem ipsum dolor sit amet conse ctetur adipiscing elit <span> Read More</span>
+						</a>
+					</li>
+					<li class="populartop">
+						<a href="#" title="popularli">
+							<em>Sept 24th 2011</em><br/> 
+							Lorem ipsum dolor sit amet conse ctetur adipiscing elit <span> Read More</span>
+						</a>
+					</li>
+					<li class="populartop">
+						<a href="#" title="popularli">
+							<em>Sept 24th 2011</em><br/> 
+							Lorem ipsum dolor sit amet conse ctetur adipiscing elit <span> Read More</span>
+						</a>
+					</li>
+					<li class="populartop popularbo">
+						<a href="#" title="popularli">
+							<em>Sept 24th 2011</em><br/> 
+							Lorem ipsum dolor sit amet conse ctetur adipiscing elit <span> Read More</span>
+						</a>
+					</li>
+				</ul>
+				<div class="popular-morebtn">
+					<a href="#" title="more"><img src="img/btn-more.jpg" alt="morebtn"/></a>
+				</div>
+			</div>
+			<div class="banner">
+				<a href="#" title="banner"><img src="img/banner2.jpg" alt="banner"/></a>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<div class="adsection">
+			<a href="#" title="banner"><img src="img/banner3.jpg" alt="banner"/></a>
+		</div>
+		<ul class="btmnav">
+			<li><a href="#">World  News</a></li>
+			<li><a href="#">Sports</a></li>
+			<li><a href="#">Techology</a></li>
+			<li><a href="#">Business</a></li>
+			<li><a href="#">Movies</a></li>
+			<li><a href="#">Entertainment</a></li>
+			<li><a href="#">Culture</a></li>
+			<li><a href="#">Books</a></li>
+			<li><a href="#">Classifieds</a></li>
+			<li><a href="#" class="lastgnv">Blogs</a></li>
+		</ul>
+		<p>Copyright © 2011 The News Reporter Inc. All rights reserved. Theme designed by GraphicsFuel.com</p>
+		<p>Reproduction in whole or in part in any form or medium without express written permission of The News Reporter Inc. is prohibited. The trade marks and images used in the design are the copyright of their respective owners. They are used only for display purpose.</p>
+	</div>
+  </div>
+ </body>
+</html>
